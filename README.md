@@ -1,6 +1,5 @@
 # react_travel
-**学习React，做一个简单Demo旅游网项目
-
+**学习React，做一个简单Demo旅游网项目**
 
 ---
 
