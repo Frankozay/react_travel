@@ -3,6 +3,7 @@ import logo from "@/assets/logo.jpg";
 import styles from "./Header.module.css";
 import { Layout, Typography, Input, Menu, Button, Dropdown, Space } from "antd";
 import { GlobalOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
 
 const navItems = [
   { label: "旅游首页", key: "item-1" },
@@ -29,6 +30,7 @@ const langItems = [
 ];
 
 export const Header: React.FC = () => {
+  const history = useHistory();
   return (
     <div className={styles["app-header"]}>
       {/* topheader */}
@@ -43,16 +45,19 @@ export const Header: React.FC = () => {
             语言
           </Dropdown.Button>
           <Space size={0} className={styles["button-group"]}>
-            <Button>注册</Button>
-            <Button>登录</Button>
+            <Button onClick={() => history.push("/register")}>注册</Button>
+            <Button onClick={() => history.push("/signIn")}>登录</Button>
           </Space>
         </div>
       </div>
       <Layout.Header className={styles["main-header"]}>
-        <img src={logo} alt="" className={styles["App-logo"]} />
-        <Typography.Title level={3} className={styles.title}>
-          白耗儿旅游网
-        </Typography.Title>
+        <span onClick={() => history.push("/")}>
+          <img src={logo} alt="" className={styles["App-logo"]} />
+          <Typography.Title level={3} className={styles.title}>
+            白耗儿旅游网
+          </Typography.Title>
+        </span>
+
         <Input.Search
           placeholder="请输入旅游目的地，主题或关键字"
           className={styles["search-input"]}
