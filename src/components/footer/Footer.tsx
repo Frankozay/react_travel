@@ -1,11 +1,12 @@
 import React from "react";
 import { Layout, Typography } from "antd";
+import { Trans } from "react-i18next";
 
 export const Footer: React.FC = () => {
   return (
     <Layout.Footer>
       <Typography.Title level={3} style={{ textAlign: "center" }}>
-        版权所有 @ React 旅游网
+        <Trans>footer.detail</Trans>
       </Typography.Title>
     </Layout.Footer>
   );

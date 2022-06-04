@@ -27,5 +27,5 @@
       }
     ]
   },
-  "include": ["src", "craco.config.js"]
+  "include": ["src", "craco.config.ts"]
 }

@@ -14,10 +14,14 @@
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
     "antd": "^4.20.7",
+    "i18next": "19.8.4",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-i18next": "11.8.5",
+    "react-redux": "7.2.2",
     "react-router-dom": "5.2.0",
     "react-scripts": "5.0.1",
+    "redux": "4.0.5",
     "typescript": "^4.7.2",
     "web-vitals": "^2.1.4"
   },
@@ -46,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-redux": "^7.1.24",
     "typescript-plugin-css-modules": "^3.4.0"
   }
 }
