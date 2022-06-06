@@ -6,7 +6,7 @@ import {
 import { RecoomendProductAction } from "./recommendProductsActions";
 
 interface RecommendProductsState {
-  productList: any[];
+  productList: any;
   loading: boolean;
   error: string | null;
 }
