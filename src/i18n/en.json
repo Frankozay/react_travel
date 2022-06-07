@@ -20,7 +20,10 @@
     "enterprise": "Enterprise",
     "high_end": "High-end",
     "outdoor": "Outdoor",
-    "insurance": "Insurance"
+    "insurance": "Insurance",
+    "shoppingCart": "Shopping Cart",
+    "signOut": "Sign Out",
+    "welcome": "welcome"
   },
   "footer": {
     "detail": "All rights reserved @ ReactTravel.com"
