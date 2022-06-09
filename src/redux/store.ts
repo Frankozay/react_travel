@@ -10,6 +10,8 @@ import { changeLanguage } from "./middlewares";
 import { productDetailSlice } from "./productDetail/slice";
 import { productSearchSlice } from "./productSearch/slice";
 import { userSlice } from "./user/slice";
+import { shoppingCartSlice } from "./shoppingCart/slice";
+import { orderSlice } from "./order/slice";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +25,8 @@ const rootReducer = combineReducers({
   productDetail: productDetailSlice.reducer,
   productSearch: productSearchSlice.reducer,
   user: userSlice.reducer,
+  shoppingCart: shoppingCartSlice.reducer,
+  order: orderSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -34,7 +38,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(changeLanguage),
+    getDefaultMiddleware({ serializableCheck: false }).concat(changeLanguage),
   devTools: true,
 });
 

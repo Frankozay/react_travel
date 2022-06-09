@@ -14,12 +14,18 @@ interface FetchRecommendProductStartAction {
 
 interface FetchRecommendProductSuccessAction {
   type: typeof FETCH_RECOMMEND_PRODUCTS_SUCCESS;
-  payload: any;
+  payload: {
+    error: string | null;
+    productList: any;
+  };
 }
 
 interface FetchRecommendProductFailAction {
   type: typeof FETCH_RECOMMEND_PRODUCTS_FAIL;
-  payload: any;
+  payload: {
+    error: string | null;
+    productList: any;
+  };
 }
 
 export type RecoomendProductAction =
@@ -39,7 +45,7 @@ export const fetchRecommendProductSuccessActionCreator = (
 ): FetchRecommendProductSuccessAction => {
   return {
     type: FETCH_RECOMMEND_PRODUCTS_SUCCESS,
-    payload: data,
+    payload: { productList: data, error: null },
   };
 };
 
@@ -48,7 +54,7 @@ export const fetchRecommendProductFailActionCreator = (
 ): FetchRecommendProductFailAction => {
   return {
     type: FETCH_RECOMMEND_PRODUCTS_FAIL,
-    payload: error,
+    payload: { productList: [], error: error },
   };
 };
 

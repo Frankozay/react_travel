@@ -6,15 +6,15 @@ import {
 import { RecoomendProductAction } from "./recommendProductsActions";
 
 interface RecommendProductsState {
-  productList: any;
   loading: boolean;
   error: string | null;
+  productList: any;
 }
 
 const defaultState: RecommendProductsState = {
-  productList: [],
   loading: true,
   error: null,
+  productList: [],
 };
 
 function reducer(state = defaultState, action: RecoomendProductAction) {
@@ -22,9 +22,13 @@ function reducer(state = defaultState, action: RecoomendProductAction) {
     case FETCH_RECOMMEND_PRODUCTS_START:
       return { ...state, loading: true };
     case FETCH_RECOMMEND_PRODUCTS_SUCCESS:
-      return { ...state, loading: false, productList: action.payload };
+      return {
+        ...state,
+        loading: false,
+        productList: action.payload.productList,
+      };
     case FETCH_RECOMMEND_PRODUCTS_FAIL:
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload.error };
     default:
       return state;
   }
