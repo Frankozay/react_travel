@@ -26,7 +26,13 @@ export const getProductDetail = createAsyncThunk(
 export const productDetailSlice = createSlice({
   name: "productDetail",
   initialState,
-  reducers: {},
+  reducers: {
+    pageOut: (state) => {
+      state.data = null;
+      state.error = null;
+      state.loading = true;
+    },
+  },
   extraReducers: {
     [getProductDetail.pending.type]: (state) => {
       state.loading = true;

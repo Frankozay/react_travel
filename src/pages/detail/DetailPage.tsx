@@ -17,11 +17,14 @@ import {
 } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useSelector } from "@/redux/hooks";
-import { getProductDetail } from "@/redux/productDetail/slice";
+import {
+  getProductDetail,
+  productDetailSlice,
+} from "@/redux/productDetail/slice";
 import { ProductIntro, ProductComments } from "@/components";
 import { MainLayout } from "@/layouts/mainLayout";
-import { commentMockData } from "./mockup";
 import { addShoppingCartItem } from "@/redux/shoppingCart/slice";
+import { commentMockData } from "./mockup";
 
 const { RangePicker } = DatePicker;
 
@@ -46,6 +49,10 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
 
   useEffect(() => {
     dispatch(getProductDetail(touristRouteId));
+
+    return () => {
+      dispatch(productDetailSlice.actions.pageOut());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (loading) {
