@@ -1,7 +1,11 @@
 import React from "react";
+import { useCallback } from "react";
 import { Link } from "react-router-dom";
-import { List, Rate, Space, Image, Tag, Typography } from "antd";
+import { List, Rate, Space, Image, Tag, Typography, Button } from "antd";
+import { useDispatch } from "react-redux";
+import { useSelector } from "@/redux/hooks";
 import { LikeOutlined, StarOutlined } from "@ant-design/icons";
+import { delSingleShoppingCartItem } from "@/redux/shoppingCart/slice";
 
 const { Text } = Typography;
 
@@ -17,9 +21,11 @@ interface Product {
   touristRoutePictures: any[];
   travelDays: string;
   tripType: string;
+  cid: string;
 }
 interface PropsType {
   data: Product[];
+  cartId?: any;
   paging?: any;
   onPageChange?: (nextPage, pageSize) => void;
 }
@@ -42,6 +48,7 @@ const listData = (productList: Product[]) =>
     originalPrice: p.originalPrice,
     discountPresent: p.discountPresent,
     rating: p.rating,
+    cid: null,
   }));
 
 const IconText = ({ icon, text }) => (
@@ -53,10 +60,28 @@ const IconText = ({ icon, text }) => (
 
 export const ProductList: React.FC<PropsType> = ({
   data,
+  cartId,
   paging,
   onPageChange,
 }) => {
+  const jwt = useSelector((s) => s.user.token) as string;
+
+  const dispatch = useDispatch();
+
+  const deleteItem = useCallback(
+    (item) => {
+      return (e) => {
+        dispatch(delSingleShoppingCartItem({ jwt, itemId: item.cid }));
+      };
+    },
+    [jwt, dispatch]
+  );
+
   const products = listData(data);
+  for (let i = 0; i < products.length; i++) {
+    products[i].cid = cartId[i];
+  }
+
   return (
     <List
       itemLayout="vertical"
@@ -96,10 +121,20 @@ export const ProductList: React.FC<PropsType> = ({
             />,
             <>
               <Rate defaultValue={3} />
-              <Text strong className="ant-rate-text">
+              <Text strong style={{ width: "20px" }} className="ant-rate-text">
                 {item.rating}
               </Text>
             </>,
+            paging ? null : (
+              <Button
+                size="small"
+                type="primary"
+                danger
+                onClick={deleteItem(item)}
+              >
+                删除
+              </Button>
+            ),
           ]}
           extra={
             <Image width={272} height={172} alt="image" src={item.imgSrc} />

@@ -21,7 +21,10 @@ export const ShoppingCartPage: React.FC = () => {
       <Row>
         <Col span={16}>
           <div className={styles["product-list-container"]}>
-            <ProductList data={shoppingCartItems.map((s) => s.touristRoute)} />
+            <ProductList
+              data={shoppingCartItems.map((s) => s.touristRoute)}
+              cartId={shoppingCartItems.map((s) => s.id)}
+            />
           </div>
         </Col>
         <Col span={8}>
