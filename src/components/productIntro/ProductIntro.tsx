@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ProductIntro.module.css";
 import { Typography, Carousel, Image, Rate, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
+import { handlePrice } from "@/utils";
 
 interface PropsType {
   title: string;
@@ -58,7 +59,7 @@ export const ProductIntro: React.FC<PropsType> = ({
         <>
           ¥{" "}
           <Typography.Text type="danger" strong>
-            {price}
+            {handlePrice(price)}
           </Typography.Text>
         </>
       ),
@@ -68,9 +69,9 @@ export const ProductIntro: React.FC<PropsType> = ({
       title: "限时抢购折扣",
       description: discount ? (
         <>
-          ¥ <Typography.Text delete>{price}</Typography.Text>{" "}
+          ¥ <Typography.Text delete>{handlePrice(price)}</Typography.Text>{" "}
           <Typography.Text type="danger" strong>
-            ¥ {discount}
+            ¥ {handlePrice(discount)}
           </Typography.Text>
         </>
       ) : (
@@ -102,7 +103,10 @@ export const ProductIntro: React.FC<PropsType> = ({
       <Typography.Text>{shortDescription}</Typography.Text>
       <div className={styles["intro-detail-content"]}>
         <Typography.Text style={{ marginLeft: 20 }}>
-          ¥<span className={styles["intro-detail-strong-text"]}>{price}</span>
+          ¥
+          <span className={styles["intro-detail-strong-text"]}>
+            {handlePrice(price)}
+          </span>
           /人起
         </Typography.Text>
         <Typography.Text style={{ marginLeft: 50 }}>

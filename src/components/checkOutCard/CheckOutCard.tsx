@@ -3,6 +3,7 @@ import { Skeleton, Card, Button, Typography, Table } from "antd";
 import { CheckCircleOutlined, HomeOutlined } from "@ant-design/icons";
 import { ColumnsType } from "antd/es/table";
 import { useHistory } from "react-router-dom";
+import { handlePrice } from "@/utils";
 
 const { Meta } = Card;
 const { Title, Text } = Typography;
@@ -43,12 +44,16 @@ export const CheckOutCard: React.FC<PropsType> = ({
     ? order.orderItems.map((i, index) => ({
         key: index,
         item: i.touristRoute.title,
-        amount: (
+        amount: i.discountPresent ? (
           <>
-            <Text delete>¥ {i.originalPrice} </Text>{" "}
+            <Text delete>¥ {handlePrice(i.originalPrice)} </Text>{" "}
             <Text type="danger" strong>
-              ¥ {i.originalPrice * i.discountPresent}
+              ¥ {handlePrice(i.originalPrice * i.discountPresent)}
             </Text>
+          </>
+        ) : (
+          <>
+            <Text>¥ {handlePrice(i.originalPrice)} </Text>
           </>
         ),
       }))

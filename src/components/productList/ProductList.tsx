@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "@/redux/hooks";
 import { LikeOutlined, StarOutlined } from "@ant-design/icons";
 import { delSingleShoppingCartItem } from "@/redux/shoppingCart/slice";
+import { handlePrice } from "@/utils";
 
 const { Text } = Typography;
 
@@ -120,7 +121,7 @@ export const ProductList: React.FC<PropsType> = ({
               key="list-vertical-like-o"
             />,
             <>
-              <Rate defaultValue={3} />
+              <Rate allowHalf defaultValue={3} value={item.rating} />
               <Text strong style={{ width: "20px" }} className="ant-rate-text">
                 {item.rating}
               </Text>
@@ -146,19 +147,19 @@ export const ProductList: React.FC<PropsType> = ({
                 {item.discountPresent ? (
                   <>
                     <Text style={{ fontSize: 20, fontWeight: 400 }} delete>
-                      ¥ {item.originalPrice}
+                      ¥ {handlePrice(item.originalPrice)}
                     </Text>
                     <Text
                       type="danger"
                       style={{ fontSize: 20, fontWeight: 400 }}
                     >
                       {" "}
-                      ¥ {item.price}
+                      ¥ {handlePrice(item.price)}
                     </Text>
                   </>
                 ) : (
                   <Text style={{ fontSize: 20, fontWeight: 400 }}>
-                    ¥ {item.price}
+                    ¥ {handlePrice(item.price)}
                   </Text>
                 )}
                 <Link to={"/detail/" + item.id}> {item.title}</Link>

@@ -62,7 +62,6 @@ class HomePageComponent extends React.Component<PropsType> {
     if (error) {
       return <div>网站出错:{error}</div>;
     }
-    console.log(productList);
     return (
       <MainLayout>
         <Row style={{ marginTop: 20 }}>

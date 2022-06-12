@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, Typography } from "antd";
 import { withRouter, Link, RouteComponentProps } from "react-router-dom";
+import { handlePrice } from "@/utils";
 
 interface PropTypes extends RouteComponentProps {
   id: string | number;
@@ -30,7 +31,7 @@ const ProductImageComponent: React.FC<PropTypes> = ({
       <div>
         <Typography.Text type="secondary">{title.slice(0, 25)}</Typography.Text>
         <Typography.Text type="danger" strong>
-          ¥ {price} 起
+          ¥ {handlePrice(price)} 起
         </Typography.Text>
       </div>
     </Link>
