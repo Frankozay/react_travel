@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ProductIntro.module.css";
 import { Typography, Carousel, Image, Rate, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { handlePrice } from "@/utils";
+import { handlePrice, getKey } from "@/utils";
 
 interface PropsType {
   title: string;
@@ -18,21 +18,21 @@ interface PropsType {
 interface RowType {
   title: string;
   description: string | number | React.ReactNode;
-  key: number;
+  key: number | string;
 }
 
 const columns: ColumnsType<RowType> = [
   {
     title: "title",
     dataIndex: "title",
-    key: Math.random() * Math.random(),
+    key: getKey(),
     align: "left",
     width: 120,
   },
   {
     title: "description",
     dataIndex: "description",
-    key: Math.random() * Math.random(),
+    key: getKey(),
     align: "center",
   },
 ];
@@ -116,7 +116,7 @@ export const ProductIntro: React.FC<PropsType> = ({
       </div>
       <Carousel autoplay slidesToShow={3}>
         {pictures.map((p) => (
-          <Image height={150} src={p} key={Math.random() * Math.random()} />
+          <Image height={150} src={p} key={getKey()} />
         ))}
       </Carousel>
       <Table<RowType>

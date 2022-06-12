@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "@/redux/hooks";
 import { LikeOutlined, StarOutlined } from "@ant-design/icons";
 import { delSingleShoppingCartItem } from "@/redux/shoppingCart/slice";
-import { handlePrice } from "@/utils";
+import { handlePrice, getKey } from "@/utils";
 
 const { Text } = Typography;
 
@@ -108,7 +108,7 @@ export const ProductList: React.FC<PropsType> = ({
       }
       renderItem={(item) => (
         <List.Item
-          key={item.title}
+          key={getKey()}
           actions={[
             <IconText
               icon={StarOutlined}

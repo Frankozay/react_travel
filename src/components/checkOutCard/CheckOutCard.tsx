@@ -3,7 +3,7 @@ import { Skeleton, Card, Button, Typography, Table } from "antd";
 import { CheckCircleOutlined, HomeOutlined } from "@ant-design/icons";
 import { ColumnsType } from "antd/es/table";
 import { useHistory } from "react-router-dom";
-import { handlePrice } from "@/utils";
+import { handlePrice, getKey } from "@/utils";
 
 const { Meta } = Card;
 const { Title, Text } = Typography;
@@ -42,7 +42,7 @@ export const CheckOutCard: React.FC<PropsType> = ({
 
   const paymentData: OrderItem[] = order
     ? order.orderItems.map((i, index) => ({
-        key: index,
+        key: getKey(),
         item: i.touristRoute.title,
         amount: i.discountPresent ? (
           <>

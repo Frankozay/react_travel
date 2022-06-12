@@ -13,6 +13,17 @@
   "@reduxjs/toolkit": "^1.8.2",
 ```
 ---
+## 运行说明
+需要Node环境及Npm或Yarn
+
+下载解压后在根文件夹使用命令：
+`npm install` 或 `yarn install`
+
+成功后使用命令：
+`npm start` 或 `yarn start`运行即可
+
+
+---
 ## 更新日志：
 
 #### 2022.6.12
@@ -41,6 +52,9 @@
 之前的价格未做处理，会出现三位小数甚至更多位小数
 支持购物车页面星级评价展示半星
 
+**引入nonoid作为key生成器**
+使用nanoid生成key
+
 
 ---
 ## 学习日志
@@ -62,6 +76,7 @@
       "@/*": ["src/*"]
     },
   "include": ["src", "craco.config.ts"]
+  }
 ```
 
 ##### 2022.6.3 - 引入react-router

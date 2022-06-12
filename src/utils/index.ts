@@ -1,1 +1,2 @@
-export { handlePrice } from "./price/handlePrice";
+export { handlePrice } from "./price";
+export { getKey } from "./nanoid";

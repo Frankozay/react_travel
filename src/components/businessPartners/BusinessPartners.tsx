@@ -7,6 +7,7 @@ import image4 from "@/assets/images/facebook-807588_640.png";
 
 import { Row, Col, Divider, Typography } from "antd";
 import { Trans } from "react-i18next";
+import { getKey } from "@/utils";
 
 const companies = [
   { src: image1, title: "Microsoft" },
@@ -25,7 +26,7 @@ export const BusinessPartners: React.FC = (props) => {
       </Divider>
       <Row>
         {companies.map((c, index) => (
-          <Col span={6} key={`business-partner-${index}`}>
+          <Col span={6} key={`business-partner-${getKey()}`}>
             <img
               alt="business-partner"
               src={c.src}
