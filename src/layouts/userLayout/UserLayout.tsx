@@ -5,6 +5,8 @@ import logo from "@/assets/logo.jpg";
 import { Link } from "react-router-dom";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { Layout, Menu, Dropdown, Button } from "antd";
+import { MenuItem, getItem } from "@/utils";
+
 const { Header, Footer, Content } = Layout;
 
 interface Props {
@@ -12,18 +14,13 @@ interface Props {
 }
 
 export const UserLayout: React.FC<Props> = (props) => {
-  const menu = (
-    <Menu>
-      <Menu.Item>中文</Menu.Item>
-      <Menu.Item>English</Menu.Item>
-    </Menu>
-  );
+  const items: MenuItem[] = [getItem("中文", "1"), getItem("English", "2")];
 
   return (
     <Layout className={styles["user-layout-container"]}>
       <Header className={styles["header"]}>
         <div className={styles["lang"]}>
-          <Dropdown overlay={menu}>
+          <Dropdown overlay={<Menu items={items} />}>
             <Button>
               {" "}
               选择语言 <CaretDownOutlined />

@@ -24,6 +24,7 @@ import {
 import { ProductIntro, ProductComments } from "@/components";
 import { MainLayout } from "@/layouts/mainLayout";
 import { addShoppingCartItem } from "@/redux/shoppingCart/slice";
+import { MenuItem, getItem } from "@/utils";
 import { commentMockData } from "./mockup";
 
 const { RangePicker } = DatePicker;
@@ -47,6 +48,13 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
   const jwt = useSelector((s) => s.user.token) as string;
   const shoppingCartLoading = useSelector((s) => s.user.loading);
 
+  const items: MenuItem[] = [
+    getItem(<Anchor.Link href="#feature" title="产品特色" />, "1"),
+    getItem(<Anchor.Link href="#fees" title="费用" />, "3"),
+    getItem(<Anchor.Link href="#notes" title="预定须知" />, "4"),
+    getItem(<Anchor.Link href="#comments" title="用户评论" />, "5"),
+  ];
+
   useEffect(() => {
     dispatch(getProductDetail(touristRouteId));
 
@@ -55,6 +63,7 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   if (loading) {
     return (
       <Spin
@@ -110,20 +119,7 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
       </div>
       {/* 锚点菜单 */}
       <Anchor className={styles["product-detail-anchor"]}>
-        <Menu mode="horizontal">
-          <Menu.Item key="1">
-            <Anchor.Link href="#feature" title="产品特色"></Anchor.Link>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Anchor.Link href="#fees" title="费用"></Anchor.Link>
-          </Menu.Item>
-          <Menu.Item key="4">
-            <Anchor.Link href="#notes" title="预定须知"></Anchor.Link>
-          </Menu.Item>
-          <Menu.Item key="5">
-            <Anchor.Link href="#comments" title="用户评论"></Anchor.Link>
-          </Menu.Item>
-        </Menu>
+        <Menu mode="horizontal" items={items} />
       </Anchor>
       {/* 产品特色 */}
       <div id="feature" className={styles["product-detail-container"]}>
