@@ -6,7 +6,7 @@ import image3 from "@/assets/images/follow-826033_640.png";
 import image4 from "@/assets/images/facebook-807588_640.png";
 
 import { Row, Col, Divider, Typography } from "antd";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { getKey } from "@/utils";
 
 const companies = [
@@ -17,11 +17,12 @@ const companies = [
 ];
 
 export const BusinessPartners: React.FC = (props) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.content}>
       <Divider orientation="left">
         <Typography.Title level={3}>
-          <Trans>home_page.joint_venture</Trans>
+          {t("home_page.joint_venture")}
         </Typography.Title>
       </Divider>
       <Row>
