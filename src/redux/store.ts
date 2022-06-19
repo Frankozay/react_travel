@@ -1,12 +1,9 @@
-// import thunk from "redux-thunk";
-import languageReducer from "./language/languageReducer";
-import recommendProductsReducer from "./recommendProducts/recommendProductsReducer";
-
-// import { createStore, applyMiddleware } from "redux";
-import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { persistStore, persistReducer } from "redux-persist";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { changeLanguage } from "./middlewares";
+import { languageSlice } from "./language/slice";
+import { recommendProductSlice } from "./recommendProducts/slice";
 import { productDetailSlice } from "./productDetail/slice";
 import { productSearchSlice } from "./productSearch/slice";
 import { userSlice } from "./user/slice";
@@ -20,8 +17,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  language: languageReducer,
-  recommendProducts: recommendProductsReducer,
+  language: languageSlice.reducer,
+  recommendProduct: recommendProductSlice.reducer,
   productDetail: productDetailSlice.reducer,
   productSearch: productSearchSlice.reducer,
   user: userSlice.reducer,

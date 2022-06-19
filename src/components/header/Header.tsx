@@ -9,10 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useSelector } from "@/redux/hooks";
-import {
-  addLanguageActionCreator,
-  changeLanguageActionCreator,
-} from "@/redux/language/languageActions";
+import { languageSlice } from "@/redux/language/slice";
 import { userSlice } from "@/redux/user/slice";
 import { MenuItem, getItem } from "@/utils";
 
@@ -67,10 +64,15 @@ export const Header: React.FC = () => {
   }, [jwt]);
 
   const menuClickHandler = (e) => {
+    console.log("first");
     if (e.key === "new") {
-      dispatch(addLanguageActionCreator("新语言", "new_lang"));
+      // dispatch(addLanguageActionCreator("新语言", "new_lang"));
+      dispatch(
+        languageSlice.actions.addLanguage({ name: "新语言", code: "new_lang" })
+      );
     } else {
-      dispatch(changeLanguageActionCreator(e.key));
+      // dispatch(changeLanguageActionCreator(e.key));
+      dispatch(languageSlice.actions.changeLanguage(e.key));
     }
   };
 

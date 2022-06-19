@@ -17,9 +17,9 @@ import sideImage3 from "@/assets/images/sider_2019_02-04-2.png";
 
 const mapStateToProps = (state: RootState) => {
   return {
-    loading: state.recommendProducts.loading,
-    error: state.recommendProducts.error,
-    productList: state.recommendProducts.productList,
+    loading: state.recommendProduct.loading,
+    error: state.recommendProduct.error,
+    productList: state.recommendProduct.productList,
   };
 };
 

@@ -6,7 +6,7 @@ import sideImage3 from "@/assets/images/sider_2019_02-04-2.png";
 import { Row, Col, Typography, Spin } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { getDataActionCreator } from "@/redux/recommendProducts/recommendProductsActions";
+import { getRecommendProduct } from "@/redux/recommendProducts/slice";
 import { useSelector } from "@/redux/hooks";
 import { MainLayout } from "@/layouts/mainLayout";
 import {
@@ -17,10 +17,10 @@ import {
 } from "@/components";
 
 export const HomePage: React.FC = () => {
-  const loading = useSelector((state) => state.recommendProducts.loading);
-  const error = useSelector((state) => state.recommendProducts.error);
+  const loading = useSelector((state) => state.recommendProduct.loading);
+  const error = useSelector((state) => state.recommendProduct.error);
   const productList = useSelector(
-    (state) => state.recommendProducts.productList
+    (state) => state.recommendProduct.productList
   );
 
   const dispatch = useDispatch();
@@ -28,12 +28,11 @@ export const HomePage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch(getDataActionCreator());
+    dispatch(getRecommendProduct());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
-    console.log("2");
     return (
       <Spin
         size="large"
