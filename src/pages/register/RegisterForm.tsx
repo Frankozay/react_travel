@@ -5,7 +5,7 @@ import styles from "./RegisterForm.module.css";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 
-export const RegisterForm = () => {
+export const RegisterForm: React.FC = () => {
   const history = useHistory();
 
   const onFinish = async (values) => {

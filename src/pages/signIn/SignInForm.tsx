@@ -8,7 +8,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useSelector } from "@/redux/hooks";
 import { signIn } from "@/redux/user/slice";
 
-export const SignInForm = () => {
+export const SignInForm:React.FC = () => {
   const loading = useSelector((s) => s.user.loading);
   const jwt = useSelector((s) => s.user.token);
   // const error = useSelector((s) => s.user.error);
