@@ -110,11 +110,11 @@ export const Header: React.FC = () => {
             </Space>
           ) : (
             <Space size={0} className={styles["button-group"]}>
-              <Button onClick={() => history.push("/register")}>
-                {t("header.register")}
-              </Button>
               <Button onClick={() => history.push("/signIn")}>
                 {t("header.signin")}
+              </Button>
+              <Button onClick={() => history.push("/register")}>
+                {t("header.register")}
               </Button>
             </Space>
           )}
