@@ -1,7 +1,9 @@
 import React from "react";
-import { FilterTag } from "./FilterTag";
+
 import { Typography, Divider } from "antd";
+import { FilterTag } from "./FilterTag";
 import { getKey } from "@/utils";
+
 const { Text } = Typography;
 
 interface PropsType {
@@ -9,7 +11,7 @@ interface PropsType {
   tags: string[];
 }
 
-export const Filter: React.FC<PropsType> = ({ title, tags }) => {
+export const Filter: React.FC<PropsType> = React.memo(({ title, tags }) => {
   return (
     <div>
       <Text style={{ marginRight: 40, fontSize: 15, fontWeight: 500 }}>
@@ -27,4 +29,4 @@ export const Filter: React.FC<PropsType> = ({ title, tags }) => {
       })}
     </div>
   );
-};
+});

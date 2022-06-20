@@ -27,7 +27,7 @@ const PrivateRoute = ({ children }) => {
   return jwt ? children : <Navigate to="/signin" />;
 };
 
-function App() {
+const App: React.FC = React.memo(() => {
   const jwt = useSelector((s) => s.user.token);
   const dispatch = useDispatch();
 
@@ -67,6 +67,6 @@ function App() {
       </HistoryRouter>
     </div>
   );
-}
+});
 
 export default App;

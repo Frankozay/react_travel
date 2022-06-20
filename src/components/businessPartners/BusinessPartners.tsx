@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./BusinessPartners.module.css";
-import image1 from "@/assets/images/microsoft-80658_640.png";
-import image2 from "@/assets/images/icon-720944_640.png";
-import image3 from "@/assets/images/follow-826033_640.png";
-import image4 from "@/assets/images/facebook-807588_640.png";
 
 import { Row, Col, Divider, Typography } from "antd";
 import { useTranslation } from "react-i18next";
 import { getKey } from "@/utils";
+
+import image1 from "@/assets/images/microsoft-80658_640.png";
+import image2 from "@/assets/images/icon-720944_640.png";
+import image3 from "@/assets/images/follow-826033_640.png";
+import image4 from "@/assets/images/facebook-807588_640.png";
 
 const companies = [
   { src: image1, title: "Microsoft" },
@@ -16,7 +17,7 @@ const companies = [
   { src: image4, title: "Facebook" },
 ];
 
-export const BusinessPartners: React.FC = (props) => {
+export const BusinessPartners: React.FC = React.memo((props) => {
   const { t } = useTranslation();
   return (
     <div className={styles.content}>
@@ -43,4 +44,4 @@ export const BusinessPartners: React.FC = (props) => {
       </Row>
     </div>
   );
-};
+});

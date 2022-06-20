@@ -11,7 +11,7 @@ interface PropsType {
   }[];
 }
 
-export const ProductComments: React.FC<PropsType> = ({ data }) => {
+export const ProductComments: React.FC<PropsType> = React.memo(({ data }) => {
   return (
     <List
       dataSource={data}
@@ -30,4 +30,4 @@ export const ProductComments: React.FC<PropsType> = ({ data }) => {
       }}
     ></List>
   );
-};
+});

@@ -4,7 +4,7 @@
 涉及技术: React + Typescript + Antd + React-Router + Redux(thunk+toolkit) + JWT
 
 主要包版本：
-```json
+```javascript
   "react": "^18.1.0",
   // "react-router-dom": "5.2.0",
   "react-router-dom": "^6.3.0"
@@ -93,6 +93,7 @@
 - **升级React-Router@v6**
 
 升级ReactRouter到v6，v6与v5的api差异较大，原代码全保存至router@v5文件夹
+
 使用historyRouter在拦截器中跳转页面，完成拦截逻辑
 
 

@@ -1,6 +1,6 @@
 import logo from "@/assets/logo.jpg";
 import styles from "./Header.module.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import jwt_decode, { JwtPayload as DefaultJwtPayload } from "jwt-decode";
 
 import { Layout, Typography, Input, Menu, Button, Dropdown, Space } from "antd";
@@ -17,7 +17,7 @@ interface JwtPayLoad extends DefaultJwtPayload {
   username: string;
 }
 
-export const Header: React.FC = () => {
+export const Header: React.FC = React.memo(() => {
   const navigate = useNavigate();
   const language = useSelector((state) => state.language.language);
   const languageList = useSelector((state) => state.language.languageList);
@@ -30,32 +30,6 @@ export const Header: React.FC = () => {
   const shoppingCartItems = useSelector((s) => s.shoppingCart.items);
   const shoppingCartLoading = useSelector((s) => s.shoppingCart.loading);
 
-  const navItems: MenuItem[] = [
-    getItem(t("header.home_page"), "1"),
-    getItem(t("header.weekend"), "2"),
-    getItem(t("header.group"), "3"),
-    getItem(t("header.backpack"), "4"),
-    getItem(t("header.private"), "5"),
-    getItem(t("header.cruise"), "6"),
-    getItem(t("header.hotel"), "7"),
-    getItem(t("header.local"), "8"),
-    getItem(t("header.theme"), "9"),
-    getItem(t("header.custom"), "10"),
-    getItem(t("header.study"), "11"),
-    getItem(t("header.visa"), "12"),
-    getItem(t("header.enterprise"), "13"),
-    getItem(t("header.high_end"), "14"),
-    getItem(t("header.outdoor"), "15"),
-    getItem(t("header.insurance"), "16"),
-  ];
-
-  const langItems = [
-    ...languageList.map((l) => {
-      return getItem(l.name, l.code);
-    }),
-    getItem(t("header.add_new_language"), "new"),
-  ];
-
   useEffect(() => {
     if (jwt) {
       const token = jwt_decode<JwtPayLoad>(jwt);
@@ -63,27 +37,59 @@ export const Header: React.FC = () => {
     }
   }, [jwt]);
 
-  const menuClickHandler = (e) => {
-    console.log("first");
-    if (e.key === "new") {
-      // dispatch(addLanguageActionCreator("新语言", "new_lang"));
-      dispatch(
-        languageSlice.actions.addLanguage({ name: "新语言", code: "new_lang" })
-      );
-    } else {
-      // dispatch(changeLanguageActionCreator(e.key));
-      dispatch(languageSlice.actions.changeLanguage(e.key));
-    }
-  };
+  const navItems: MenuItem[] = useMemo(() => {
+    return [
+      getItem(t("header.home_page"), "1"),
+      getItem(t("header.weekend"), "2"),
+      getItem(t("header.group"), "3"),
+      getItem(t("header.backpack"), "4"),
+      getItem(t("header.private"), "5"),
+      getItem(t("header.cruise"), "6"),
+      getItem(t("header.hotel"), "7"),
+      getItem(t("header.local"), "8"),
+      getItem(t("header.theme"), "9"),
+      getItem(t("header.custom"), "10"),
+      getItem(t("header.study"), "11"),
+      getItem(t("header.visa"), "12"),
+      getItem(t("header.enterprise"), "13"),
+      getItem(t("header.high_end"), "14"),
+      getItem(t("header.outdoor"), "15"),
+      getItem(t("header.insurance"), "16"),
+    ];
+  }, [t]);
 
-  const onLogOut = () => {
+  const langItems: MenuItem[] = useMemo(() => {
+    return [
+      ...languageList.map((l) => {
+        return getItem(l.name, l.code);
+      }),
+      getItem(t("header.add_new_language"), "new"),
+    ];
+  }, [languageList, t]);
+
+  const menuClickHandler = useCallback(
+    (e) => {
+      if (e.key === "new") {
+        dispatch(
+          languageSlice.actions.addLanguage({
+            name: "新语言",
+            code: "new_lang",
+          })
+        );
+      } else {
+        dispatch(languageSlice.actions.changeLanguage(e.key));
+      }
+    },
+    [dispatch]
+  );
+
+  const onLogOut = useCallback(() => {
     dispatch(userSlice.actions.logOut());
     navigate("/");
-  };
+  }, [dispatch, navigate]);
 
   return (
     <div className={styles["app-header"]}>
-      {/* topheader */}
       <div className={styles["top-header"]}>
         <div className={styles.inner}>
           <Typography.Text>{t("header.slogan")}</Typography.Text>
@@ -141,4 +147,4 @@ export const Header: React.FC = () => {
       />
     </div>
   );
-};
+});

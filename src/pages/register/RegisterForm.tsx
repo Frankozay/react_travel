@@ -5,7 +5,7 @@ import styles from "./RegisterForm.module.css";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 
-export const RegisterForm: React.FC = () => {
+export const RegisterForm: React.FC = React.memo(() => {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
@@ -44,7 +44,7 @@ export const RegisterForm: React.FC = () => {
       className={styles["register-form"]}
     >
       <Form.Item
-        label="Username"
+        label="用户名"
         name="username"
         rules={[
           {
@@ -57,7 +57,7 @@ export const RegisterForm: React.FC = () => {
       </Form.Item>
 
       <Form.Item
-        label="Password"
+        label="密码"
         name="password"
         rules={[
           {
@@ -69,22 +69,20 @@ export const RegisterForm: React.FC = () => {
         <Input.Password />
       </Form.Item>
       <Form.Item
-        label="Confirm Password"
+        label="确认密码"
         name="confirm"
         dependencies={["password"]}
         rules={[
           {
             required: true,
-            message: "Please input your confirm password!",
+            message: "请再次输入密码！",
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
               if (!value || getFieldValue("password") === value) {
                 return Promise.resolve();
               }
-              return Promise.reject(
-                new Error("The two passwords that you entered do not match!")
-              );
+              return Promise.reject(new Error("两次输入的密码不匹配！"));
             },
           }),
         ]}
@@ -93,17 +91,6 @@ export const RegisterForm: React.FC = () => {
         <Input.Password />
       </Form.Item>
 
-      {/* <Form.Item
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item> */}
-
       <Form.Item
         wrapperCol={{
           offset: 8,
@@ -111,9 +98,9 @@ export const RegisterForm: React.FC = () => {
         }}
       >
         <Button type="primary" htmlType="submit">
-          Submit
+          注册
         </Button>
       </Form.Item>
     </Form>
   );
-};
+});

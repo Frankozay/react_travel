@@ -10,6 +10,10 @@
   background: transparent !important;
 }
 
+.header .home {
+  float: left;
+}
+
 .header .lang {
   float: right;
 }

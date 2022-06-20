@@ -1,7 +1,4 @@
 import React, { useEffect } from "react";
-import sideImage1 from "@/assets/images/sider_2019_12-09.png";
-import sideImage2 from "@/assets/images/sider_2019_02-04.png";
-import sideImage3 from "@/assets/images/sider_2019_02-04-2.png";
 
 import { Row, Col, Typography, Spin } from "antd";
 import { useTranslation } from "react-i18next";
@@ -16,7 +13,11 @@ import {
   BusinessPartners,
 } from "@/components";
 
-export const HomePage: React.FC = () => {
+import sideImage1 from "@/assets/images/sider_2019_12-09.png";
+import sideImage2 from "@/assets/images/sider_2019_02-04.png";
+import sideImage3 from "@/assets/images/sider_2019_02-04-2.png";
+
+export const HomePage: React.FC = React.memo(() => {
   const loading = useSelector((state) => state.recommendProduct.loading);
   const error = useSelector((state) => state.recommendProduct.error);
   const productList = useSelector(
@@ -29,8 +30,7 @@ export const HomePage: React.FC = () => {
 
   useEffect(() => {
     dispatch(getRecommendProduct());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return (
@@ -90,4 +90,4 @@ export const HomePage: React.FC = () => {
       <BusinessPartners />
     </MainLayout>
   );
-};
+});

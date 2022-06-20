@@ -33,11 +33,8 @@ type MatchParams = {
   touristRouteId: string;
 };
 
-export const DetailPage: React.FC = () => {
+export const DetailPage: React.FC = React.memo(() => {
   const { touristRouteId } = useParams<MatchParams>();
-  // const [loading, setLoading] = useState<boolean>(true);
-  // const [product, setProduct] = useState<any>(null);
-  // const [error, setError] = useState<string | null>(null);
 
   const loading = useSelector((state) => state.productDetail.loading);
   const error = useSelector((state) => state.productDetail.error);
@@ -63,8 +60,7 @@ export const DetailPage: React.FC = () => {
     return () => {
       dispatch(productDetailSlice.actions.pageOut());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, touristRouteId]);
 
   if (loading) {
     return (
@@ -164,4 +160,4 @@ export const DetailPage: React.FC = () => {
       </div>
     </MainLayout>
   );
-};
+});

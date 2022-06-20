@@ -1,9 +1,9 @@
 import React from "react";
 import Cards from "react-credit-cards";
-import "react-credit-cards/es/styles-compiled.css";
 import styles from "./PaymentForm.module.css";
+import "react-credit-cards/es/styles-compiled.css";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Input, Row, Col } from "antd";
 
 export const PaymentForm: React.FC = () => {
@@ -13,35 +13,33 @@ export const PaymentForm: React.FC = () => {
   const [name, setName] = useState(" ");
   const [number, setNumber] = useState(" ");
 
-  const handleInputFocus = useCallback(
-    (e: { target: { name: React.SetStateAction<string> } }) => {
-      setFocus(e.target.name);
-    },
-    []
-  );
+  const handleInputFocus = (e: {
+    target: { name: React.SetStateAction<string> };
+  }) => {
+    setFocus(e.target.name);
+  };
 
-  const handleInputChange = useCallback(
-    (e: { target: { name: React.SetStateAction<string>; value: string } }) => {
-      const { name, value } = e.target;
-      switch (name) {
-        case "cvc":
-          setCvc(value);
-          break;
-        case "name":
-          setName(value);
-          break;
-        case "number":
-          setNumber(value);
-          break;
-        case "expiry":
-          setexpiry(value);
-          break;
-        default:
-          break;
-      }
-    },
-    []
-  );
+  const handleInputChange = (e: {
+    target: { name: React.SetStateAction<string>; value: string };
+  }) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case "cvc":
+        setCvc(value);
+        break;
+      case "name":
+        setName(value);
+        break;
+      case "number":
+        setNumber(value);
+        break;
+      case "expiry":
+        setexpiry(value);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div id="PaymentForm" style={{ marginTop: 50 }}>

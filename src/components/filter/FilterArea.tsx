@@ -1,9 +1,10 @@
 import React from "react";
-import { Divider } from "antd";
-import { Filter } from "./Filter";
 import styles from "./FilterArea.module.css";
 
-export const FilterArea: React.FC = () => {
+import { Divider } from "antd";
+import { Filter } from "./Filter";
+
+export const FilterArea: React.FC = React.memo(() => {
   return (
     <>
       <Filter title="路线评价" tags={["1星", "2星", "3星", "4星", "5星"]} />
@@ -20,4 +21,4 @@ export const FilterArea: React.FC = () => {
       <Filter title="出发时间" tags={["春节", "清明", "劳动节"]} />
     </>
   );
-};
+});

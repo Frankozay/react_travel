@@ -9,7 +9,7 @@ import { MainLayout } from "@/layouts/mainLayout";
 import { ProductList, PaymentCard } from "@/components";
 import { clearShoppingCartItem, checkout } from "@/redux/shoppingCart/slice";
 
-export const ShoppingCartPage: React.FC = () => {
+export const ShoppingCartPage: React.FC = React.memo(() => {
   const loading = useSelector((s) => s.shoppingCart.loading);
   const shoppingCartItems = useSelector((s) => s.shoppingCart.items);
   const jwt = useSelector((s) => s.user.token) as string;
@@ -64,4 +64,4 @@ export const ShoppingCartPage: React.FC = () => {
       </Row>
     </MainLayout>
   );
-};
+});

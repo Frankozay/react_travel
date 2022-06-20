@@ -8,10 +8,9 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useSelector } from "@/redux/hooks";
 import { signIn } from "@/redux/user/slice";
 
-export const SignInForm: React.FC = () => {
+export const SignInForm: React.FC = React.memo(() => {
   const loading = useSelector((s) => s.user.loading);
   const jwt = useSelector((s) => s.user.token);
-  // const error = useSelector((s) => s.user.error);
 
   const dispath = useDispatch();
   const navigate = useNavigate();
@@ -58,7 +57,7 @@ export const SignInForm: React.FC = () => {
         rules={[
           {
             required: true,
-            message: "Please input your username!",
+            message: "请输入用户名",
           },
         ]}
       >
@@ -71,7 +70,7 @@ export const SignInForm: React.FC = () => {
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "请输入密码",
           },
         ]}
       >
@@ -86,7 +85,7 @@ export const SignInForm: React.FC = () => {
           span: 16,
         }}
       >
-        <Checkbox>Remember me</Checkbox>
+        <Checkbox>记住我</Checkbox>
       </Form.Item>
 
       <Form.Item
@@ -96,9 +95,9 @@ export const SignInForm: React.FC = () => {
         }}
       >
         <Button type="primary" htmlType="submit" loading={loading}>
-          Submit
+          登录
         </Button>
       </Form.Item>
     </Form>
   );
-};
+});

@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./UserLayout.module.css";
 import logo from "@/assets/logo.jpg";
 
-import { Link } from "react-router-dom";
-import { CaretDownOutlined } from "@ant-design/icons";
+import { Link, useNavigate } from "react-router-dom";
+import { CaretDownOutlined, HomeOutlined } from "@ant-design/icons";
 import { Layout, Menu, Dropdown, Button } from "antd";
 import { MenuItem, getItem } from "@/utils";
 
@@ -13,16 +13,26 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export const UserLayout: React.FC<Props> = (props) => {
+export const UserLayout: React.FC<Props> = React.memo((props) => {
+  const navigate = useNavigate();
+
   const items: MenuItem[] = [getItem("中文", "1"), getItem("English", "2")];
+
+  const goHome = (e) => {
+    navigate("/");
+  };
 
   return (
     <Layout className={styles["user-layout-container"]}>
       <Header className={styles["header"]}>
+        <div className={styles["home"]}>
+          <Button onClick={goHome}>
+            回到首页 <HomeOutlined />
+          </Button>
+        </div>
         <div className={styles["lang"]}>
           <Dropdown overlay={<Menu items={items} />}>
             <Button>
-              {" "}
               选择语言 <CaretDownOutlined />
             </Button>
           </Dropdown>
@@ -43,4 +53,4 @@ export const UserLayout: React.FC<Props> = (props) => {
       <Footer style={{ textAlign: "center" }}>白耗儿学习用</Footer>
     </Layout>
   );
-};
+});

@@ -14,7 +14,7 @@ type MatchParams = {
   keywords: string;
 };
 
-export const SearchPage: React.FC = () => {
+export const SearchPage: React.FC = React.memo(() => {
   const { keywords } = useParams<MatchParams>();
 
   const loading = useSelector((state) => state.productSearch.loading);
@@ -84,4 +84,4 @@ export const SearchPage: React.FC = () => {
       </div>
     </MainLayout>
   );
-};
+});

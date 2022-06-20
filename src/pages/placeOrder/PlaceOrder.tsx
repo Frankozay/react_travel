@@ -7,7 +7,7 @@ import { MainLayout } from "@/layouts/mainLayout";
 import { PaymentForm, CheckOutCard } from "@/components";
 import { placeOrder } from "@/redux/order/slice";
 
-export const PlaceOrderPage: React.FC = () => {
+export const PlaceOrderPage: React.FC = React.memo(() => {
   const jwt = useSelector((s) => s.user.token) as string;
   const loading = useSelector((s) => s.order.loading);
   const order = useSelector((s) => s.order.currentOrder);
@@ -32,4 +32,4 @@ export const PlaceOrderPage: React.FC = () => {
       </Row>
     </MainLayout>
   );
-};
+});
