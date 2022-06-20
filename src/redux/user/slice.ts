@@ -1,4 +1,4 @@
-import axios from "axios";
+import instance from "@/utils/axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
@@ -22,7 +22,7 @@ export const signIn = createAsyncThunk(
     },
     thunkAPI
   ) => {
-    const { data } = await axios.post(`http://123.56.149.216:8080/auth/login`, {
+    const { data } = await instance.post("/auth/login", {
       email: parameters.email,
       password: parameters.password,
     });

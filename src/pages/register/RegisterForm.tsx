@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import instance from "@/utils/axios";
 import styles from "./RegisterForm.module.css";
 
 import { useHistory } from "react-router-dom";
@@ -10,7 +10,7 @@ export const RegisterForm: React.FC = () => {
 
   const onFinish = async (values) => {
     try {
-      await axios.post("http://123.56.149.216:8080/auth/register", {
+      await instance.post("/auth/register", {
         email: values.username,
         password: values.password,
         confirmPassword: values.confirm,

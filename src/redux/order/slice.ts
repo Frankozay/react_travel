@@ -1,4 +1,4 @@
-import axios from "axios";
+import instance from "@/utils/axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { checkout } from "../shoppingCart/slice";
 
@@ -17,8 +17,8 @@ const initialState: OrderState = {
 export const placeOrder = createAsyncThunk(
   "order/placeOrder",
   async (parameters: { jwt: string; orderId: string }, thunkAPI) => {
-    const { data } = await axios.post(
-      `http://123.56.149.216:8080/api/orders/${parameters.orderId}/placeOrder`,
+    const { data } = await instance.post(
+      `/api/orders/${parameters.orderId}/placeOrder`,
       null,
       {
         headers: {

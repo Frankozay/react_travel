@@ -79,6 +79,16 @@
 语言和推荐商品的之前使用Redux进行状态管理，现使用Redux-tookit重构
 <br/>
 
+### 2022.6.21
+- **优化Axios代码，对状态码进行拦截**
+
+二次封装axios并设置拦截器以拦截401等错误。如果用到redux中的store可能会导致循环引用问题，解决方案参照官网:
+[解决方案](https://redux.js.org/faq/code-structure#how-can-i-use-the-redux-store-in-non-component-files)
+
+拦截器中尝试跳转至登录页失败，google尝试解决方案后无果，疑似React@18与react-router@v5存在兼容性问题
+
+<br/>
+
 
 ---
 ## 学习日志

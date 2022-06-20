@@ -1,4 +1,4 @@
-import axios from "axios";
+import instance from "@/utils/axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 interface ProductDetailState {
@@ -16,9 +16,7 @@ const initialState: ProductDetailState = {
 export const getProductDetail = createAsyncThunk(
   "productDetail/getProductDetail",
   async (touristRouteId: string, thunkAPI) => {
-    const { data } = await axios.get(
-      `http://123.56.149.216:8080/api/touristRoutes/${touristRouteId}`
-    );
+    const { data } = await instance.get(`/api/touristRoutes/${touristRouteId}`);
     return data;
   }
 );

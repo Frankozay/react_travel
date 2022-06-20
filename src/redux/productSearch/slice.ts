@@ -1,4 +1,4 @@
-import axios from "axios";
+import instance from "@/utils/axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 interface ProductSearchState {
@@ -25,11 +25,11 @@ export const searchProduct = createAsyncThunk(
     },
     thunkAPI
   ) => {
-    let url = `http://123.56.149.216:8080/api/touristRoutes?pageNumber=${parameters.nextPage}&pageSize=${parameters.pageSize}`;
+    let url = `/api/touristRoutes?pageNumber=${parameters.nextPage}&pageSize=${parameters.pageSize}`;
     if (parameters.keywords) {
       url += `&keyword=${parameters.keywords}`;
     }
-    const response = await axios.get(url);
+    const response = await instance.get(url);
     return {
       data: response.data,
       pagination: JSON.parse(response.headers["x-pagination"]),

@@ -1,4 +1,4 @@
-import axios from "axios";
+import instance from "@/utils/axios";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 interface RecommendProductState {
@@ -16,9 +16,7 @@ const initialState: RecommendProductState = {
 export const getRecommendProduct = createAsyncThunk(
   "recommendProduct/getRecommendProduct",
   async (thunkAPI) => {
-    const { data } = await axios.get(
-      "http://123.56.149.216:8080/api/productCollections"
-    );
+    const { data } = await instance.get("/api/productCollections");
     return data;
   }
 );
