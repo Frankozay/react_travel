@@ -6,7 +6,8 @@
 主要包版本：
 ```json
   "react": "^18.1.0",
-  "react-router-dom": "5.2.0",
+  // "react-router-dom": "5.2.0",
+  "react-router-dom": "^6.3.0"
   "redux": "4.0.5",
   "antd": "^4.20.7",
   "typescript": "^4.7.2",
@@ -85,7 +86,15 @@
 二次封装axios并设置拦截器以拦截401等错误。如果用到redux中的store可能会导致循环引用问题，解决方案参照官网:
 [解决方案](https://redux.js.org/faq/code-structure#how-can-i-use-the-redux-store-in-non-component-files)
 
-拦截器中尝试跳转至登录页失败，google尝试解决方案后无果，疑似React@18与react-router@v5存在兼容性问题
+拦截器中尝试跳转至登录页失败，等待升级至ReactRouter@V6处理
+
+<br/>
+
+- **升级React-Router@v6**
+
+升级ReactRouter到v6，v6与v5的api差异较大，原代码全保存至router@v5文件夹
+使用historyRouter在拦截器中跳转页面，完成拦截逻辑
+
 
 <br/>
 

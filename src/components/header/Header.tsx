@@ -1,11 +1,11 @@
 import logo from "@/assets/logo.jpg";
 import styles from "./Header.module.css";
-
 import React, { useState, useEffect } from "react";
 import jwt_decode, { JwtPayload as DefaultJwtPayload } from "jwt-decode";
+
 import { Layout, Typography, Input, Menu, Button, Dropdown, Space } from "antd";
 import { GlobalOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useSelector } from "@/redux/hooks";
@@ -18,7 +18,7 @@ interface JwtPayLoad extends DefaultJwtPayload {
 }
 
 export const Header: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const language = useSelector((state) => state.language.language);
   const languageList = useSelector((state) => state.language.languageList);
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ export const Header: React.FC = () => {
 
   const onLogOut = () => {
     dispatch(userSlice.actions.logOut());
-    history.push("/");
+    navigate("/");
   };
 
   return (
@@ -102,7 +102,7 @@ export const Header: React.FC = () => {
               </span>
               <Button
                 loading={shoppingCartLoading}
-                onClick={() => history.push("/shoppingCart")}
+                onClick={() => navigate("/shoppingCart")}
               >
                 {t("header.shoppingCart")}({shoppingCartItems.length})
               </Button>
@@ -110,10 +110,10 @@ export const Header: React.FC = () => {
             </Space>
           ) : (
             <Space size={0} className={styles["button-group"]}>
-              <Button onClick={() => history.push("/signIn")}>
+              <Button onClick={() => navigate("/signIn")}>
                 {t("header.signin")}
               </Button>
-              <Button onClick={() => history.push("/register")}>
+              <Button onClick={() => navigate("/register")}>
                 {t("header.register")}
               </Button>
             </Space>
@@ -121,7 +121,7 @@ export const Header: React.FC = () => {
         </div>
       </div>
       <Layout.Header className={styles["main-header"]}>
-        <span onClick={() => history.push("/")}>
+        <span onClick={() => navigate("/")}>
           <img src={logo} alt="" className={styles["App-logo"]} />
           <Typography.Title level={3} className={styles.title}>
             {t("header.title")}
@@ -131,7 +131,7 @@ export const Header: React.FC = () => {
         <Input.Search
           placeholder={"请输入旅游目的地，主题或关键字"}
           className={styles["search-input"]}
-          onSearch={(keywords) => history.push("/search/" + keywords)}
+          onSearch={(keywords) => navigate("/search/" + keywords)}
         />
       </Layout.Header>
       <Menu

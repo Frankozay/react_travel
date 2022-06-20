@@ -1,10 +1,15 @@
 import React from "react";
 import styles from "./App.module.css";
+import history from "./utils/history";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import {
+  unstable_HistoryRouter as HistoryRouter,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import { useSelector } from "@/redux/hooks";
 import {
   HomePage,
@@ -17,15 +22,9 @@ import {
 } from "@/pages";
 import { getShoppingCart } from "./redux/shoppingCart/slice";
 
-const PrivateRoute = ({ component, isAuthenticated, ...rest }) => {
-  const routeComponent = (props) => {
-    return isAuthenticated ? (
-      React.createElement(component, props)
-    ) : (
-      <Redirect to={{ pathname: "/signIn" }} />
-    );
-  };
-  return <Route render={routeComponent} {...rest} />;
+const PrivateRoute = ({ children }) => {
+  const jwt = useSelector((s) => s.user.token);
+  return jwt ? children : <Navigate to="/signin" />;
 };
 
 function App() {
@@ -40,26 +39,32 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/signIn" component={SignInPage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/detail/:touristRouteId" component={DetailPage} />
-          <Route path="/search/:keywords?" component={SearchPage} />
-          <PrivateRoute
-            isAuthenticated={jwt !== null}
+      <HistoryRouter history={history}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signIn" element={<SignInPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/detail/:touristRouteId" element={<DetailPage />} />
+          <Route path="/search/:keywords?" element={<SearchPage />} />
+          <Route
             path="/shoppingCart"
-            component={ShoppingCartPage}
+            element={
+              <PrivateRoute>
+                <ShoppingCartPage />
+              </PrivateRoute>
+            }
           />
-          <PrivateRoute
-            isAuthenticated={jwt !== null}
+          <Route
             path="/placeOrder"
-            component={PlaceOrderPage}
+            element={
+              <PrivateRoute>
+                <PlaceOrderPage />
+              </PrivateRoute>
+            }
           />
-          <Route render={() => <h1>404 not found 页面去火星了！</h1>} />
-        </Switch>
-      </BrowserRouter>
+          <Route element={<h1>404 not found 页面去火星了！</h1>} />
+        </Routes>
+      </HistoryRouter>
     </div>
   );
 }

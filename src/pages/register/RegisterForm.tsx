@@ -2,11 +2,11 @@ import React from "react";
 import instance from "@/utils/axios";
 import styles from "./RegisterForm.module.css";
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 
 export const RegisterForm: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onFinish = async (values) => {
     try {
@@ -16,7 +16,7 @@ export const RegisterForm: React.FC = () => {
         confirmPassword: values.confirm,
       });
       alert("注册成功");
-      history.push("/signIn");
+      navigate("/signIn");
     } catch (error) {
       alert("注册失败");
     }

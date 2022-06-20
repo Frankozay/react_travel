@@ -2,8 +2,9 @@ import React from "react";
 import { Skeleton, Card, Button, Typography, Table } from "antd";
 import { CheckCircleOutlined, HomeOutlined } from "@ant-design/icons";
 import { ColumnsType } from "antd/es/table";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { handlePrice, getKey } from "@/utils";
+
 
 const { Meta } = Card;
 const { Title, Text } = Typography;
@@ -38,7 +39,7 @@ export const CheckOutCard: React.FC<PropsType> = ({
   order,
   onCheckout,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const paymentData: OrderItem[] = order
     ? order.orderItems.map((i, index) => ({
@@ -67,7 +68,7 @@ export const CheckOutCard: React.FC<PropsType> = ({
           <Button
             type="primary"
             onClick={() => {
-              history.push("/");
+              navigate("/");
             }}
             loading={loading}
           >

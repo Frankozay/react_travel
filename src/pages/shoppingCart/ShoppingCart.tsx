@@ -3,7 +3,7 @@ import styles from "./ShoppingCart.module.css";
 
 import { Row, Col, Affix } from "antd";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "@/redux/hooks";
 import { MainLayout } from "@/layouts/mainLayout";
 import { ProductList, PaymentCard } from "@/components";
@@ -14,7 +14,7 @@ export const ShoppingCartPage: React.FC = () => {
   const shoppingCartItems = useSelector((s) => s.shoppingCart.items);
   const jwt = useSelector((s) => s.user.token) as string;
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <MainLayout>
@@ -47,7 +47,7 @@ export const ShoppingCartPage: React.FC = () => {
                     return;
                   }
                   dispatch(checkout(jwt));
-                  history.push("/placeOrder");
+                  navigate("/placeOrder");
                 }}
                 onShoppingCartClear={() => {
                   dispatch(

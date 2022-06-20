@@ -2,7 +2,7 @@ import styles from "./DetailPage.module.css";
 
 import React, { useEffect } from "react";
 
-import { RouteComponentProps, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   Spin,
@@ -29,11 +29,11 @@ import { commentMockData } from "./mockup";
 
 const { RangePicker } = DatePicker;
 
-interface MatchParams {
+type MatchParams = {
   touristRouteId: string;
-}
+};
 
-export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
+export const DetailPage: React.FC = () => {
   const { touristRouteId } = useParams<MatchParams>();
   // const [loading, setLoading] = useState<boolean>(true);
   // const [product, setProduct] = useState<any>(null);
@@ -56,7 +56,9 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
   ];
 
   useEffect(() => {
-    dispatch(getProductDetail(touristRouteId));
+    if (touristRouteId) {
+      dispatch(getProductDetail(touristRouteId));
+    }
 
     return () => {
       dispatch(productDetailSlice.actions.pageOut());

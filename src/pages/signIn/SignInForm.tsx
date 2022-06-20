@@ -3,24 +3,24 @@ import styles from "./SignInForm.module.css";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useSelector } from "@/redux/hooks";
 import { signIn } from "@/redux/user/slice";
 
-export const SignInForm:React.FC = () => {
+export const SignInForm: React.FC = () => {
   const loading = useSelector((s) => s.user.loading);
   const jwt = useSelector((s) => s.user.token);
   // const error = useSelector((s) => s.user.error);
 
   const dispath = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (jwt !== null) {
-      history.push("/");
+      navigate("/");
     }
-  }, [jwt, history]);
+  }, [jwt, navigate]);
 
   const onFinish = (values) => {
     dispath(
