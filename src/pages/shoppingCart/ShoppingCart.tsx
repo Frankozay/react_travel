@@ -23,7 +23,6 @@ export const ShoppingCartPage: React.FC = React.memo(() => {
           <div className={styles["product-list-container"]}>
             <ProductList
               data={shoppingCartItems.map((s) => s.touristRoute)}
-              cartId={shoppingCartItems.map((s) => s.id)}
             />
           </div>
         </Col>

@@ -26,7 +26,6 @@ interface Product {
 }
 interface PropsType {
   data: Product[];
-  cartId?: any;
   paging?: any;
   onPageChange?: (nextPage, pageSize) => void;
 }
@@ -60,7 +59,7 @@ const IconText = ({ icon, text }) => (
 );
 
 export const ProductList: React.FC<PropsType> = React.memo(
-  ({ data, cartId, paging, onPageChange }) => {
+  ({ data, paging, onPageChange }) => {
     const jwt = useSelector((s) => s.user.token) as string;
 
     const dispatch = useDispatch();
@@ -74,10 +73,6 @@ export const ProductList: React.FC<PropsType> = React.memo(
     const products = useMemo(() => {
       return listData(data);
     }, [data]);
-
-    for (let i = 0; i < products.length; i++) {
-      products[i].cid = cartId[i];
-    }
 
     return (
       <List
