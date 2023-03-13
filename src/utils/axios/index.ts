@@ -8,7 +8,7 @@ const baseURL = "http://123.56.149.216:8080";
 const instance = axios.create({
   baseURL,
   headers: {
-    "x-icode": "887E07F53CDA6854",
+    "x-icode": "F6721B01219A0E86",
   },
 });
 
@@ -27,9 +27,10 @@ instance.interceptors.response.use(
       message.error("网络异常", 3);
     } else if (error.response.status === 401) {
       message.error("用户未登录或身份已过期，请重新登录", 3);
-      store.dispatch(userSlice.actions.logOut);
-      history.push("/signin");
+      store.dispatch(userSlice.actions.logOut());
+      history.push('/signIn')
     }
+    return Promise.reject(error)
   }
 );
 

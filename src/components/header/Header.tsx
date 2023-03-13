@@ -12,6 +12,7 @@ import { useSelector } from "@/redux/hooks";
 import { languageSlice } from "@/redux/language/slice";
 import { userSlice } from "@/redux/user/slice";
 import { MenuItem, getItem } from "@/utils";
+import { getShoppingCart } from "@/redux/shoppingCart/slice";
 
 interface JwtPayLoad extends DefaultJwtPayload {
   username: string;
@@ -34,8 +35,9 @@ export const Header: React.FC = React.memo(() => {
     if (jwt) {
       const token = jwt_decode<JwtPayLoad>(jwt);
       setUsername(token.username);
+      dispatch(getShoppingCart(jwt));
     }
-  }, [jwt]);
+  }, [dispatch, jwt]);
 
   const navItems: MenuItem[] = useMemo(() => {
     return [
@@ -110,7 +112,7 @@ export const Header: React.FC = React.memo(() => {
                 loading={shoppingCartLoading}
                 onClick={() => navigate("/shoppingCart")}
               >
-                {t("header.shoppingCart")}({shoppingCartItems.length})
+                {t("header.shoppingCart")}({shoppingCartItems?shoppingCartItems.length:0})
               </Button>
               <Button onClick={onLogOut}>{t("header.signOut")}</Button>
             </Space>

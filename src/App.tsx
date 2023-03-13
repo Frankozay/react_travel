@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./App.module.css";
 import history from "./utils/history";
 
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import {
   unstable_HistoryRouter as HistoryRouter,
   Route,
@@ -20,7 +18,6 @@ import {
   ShoppingCartPage,
   PlaceOrderPage,
 } from "@/pages";
-import { getShoppingCart } from "./redux/shoppingCart/slice";
 
 const PrivateRoute = ({ children }) => {
   const jwt = useSelector((s) => s.user.token);
@@ -28,15 +25,6 @@ const PrivateRoute = ({ children }) => {
 };
 
 const App: React.FC = React.memo(() => {
-  const jwt = useSelector((s) => s.user.token);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (jwt) {
-      dispatch(getShoppingCart(jwt));
-    }
-  }, [dispatch, jwt]);
-
   return (
     <div className={styles.App}>
       <HistoryRouter history={history}>
@@ -45,7 +33,7 @@ const App: React.FC = React.memo(() => {
           <Route path="/signIn" element={<SignInPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/detail/:touristRouteId" element={<DetailPage />} />
-          <Route path="/search/:keywords?" element={<SearchPage />} />
+          <Route path="/search/:keywords" element={<SearchPage />} />
           <Route
             path="/shoppingCart"
             element={
