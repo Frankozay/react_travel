@@ -20,7 +20,7 @@
 下载解压后在根文件夹使用命令：
 `npm install` 或 `yarn install`
 
-成功后使用命令：
+成功后使用命令： 
 `npm start` 或 `yarn start`运行即可
 
 
